@@ -14,9 +14,8 @@ const Navbar = async () => {
         <Icons.logo className='h-8 w-8 sm:h-6 sm:w-6' />
         <p className='hidden text-zinc-700 text-sm font-medium md:block'>Breadit</p>
       </Link>
-
       {session?.user ? (
-          <p>youre logged in</p>
+          <p>you are logged in</p>
         ) : (
           <Link href='/sign-in' className={buttonVariants()}>
             Sign In
