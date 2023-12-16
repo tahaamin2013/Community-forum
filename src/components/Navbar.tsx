@@ -1,6 +1,6 @@
 "use client"
 import Link from 'next/link';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Icons } from './icons';
 import { Button, buttonVariants } from './ui/Button';
 import { signIn, signOut, useSession } from 'next-auth/react';
@@ -15,7 +15,7 @@ const Navbar = () => {
       if (signInResult?.error) {
         console.error(signInResult.error);
       } else {
-        setIsLoggedIn(true);
+        setIsLoggedIn(true); // Update isLoggedIn state immediately after successful login
       }
     } catch (error) {
       console.error('Error during sign-in:', error);
@@ -25,15 +25,11 @@ const Navbar = () => {
   const handleSignOut = async () => {
     try {
       await signOut();
-      setIsLoggedIn(false);
+      setIsLoggedIn(false); // Update isLoggedIn state immediately after successful logout
     } catch (error) {
       console.error('Error during sign-out:', error);
     }
   };
-
-  useEffect(() => {
-    setIsLoggedIn(!!session); // Update isLoggedIn state when session changes
-  }, [session]);
 
   return (
     <div className='fixed top-0 inset-x-0 h-fit bg-white shadow-md z-[10] py-2'>
@@ -47,7 +43,7 @@ const Navbar = () => {
           <p>You are logged in</p>
         ) : (
           <Button onClick={session !== null ? handleSignOut : handleSignIn}>
-            Login
+            {session !== null ? 'Logout' : 'Login'}
           </Button>
         )}
       </div>
