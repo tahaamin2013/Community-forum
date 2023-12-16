@@ -28,19 +28,8 @@ const Navbar = () => {
             Sign In
           </Link>
         )} */}
-         {
-                  session !== null ?
-
-                  <Button onClick={()=> router.push('/sign-in')}>
-                  Sign in
-                </Button> :
-                 <Button onClick={() => signOut()}>
-                 Sign Out
-               </Button> 
-                
-
-
-            }
+         
+          <Button onClick={session !== null ? ()=> signOut() : ()=> router.push('/sign-in')} >{session !== null ? "Logout" : "Login"}</Button>
       </div>
       </div>
   )
