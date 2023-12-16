@@ -43,7 +43,7 @@ const Navbar = () => {
           <p>You are logged in</p>
         ) : (
           <Button onClick={session !== null ? handleSignOut : handleSignIn}>
-            {session !== null ? 'Logout' : 'Login'}
+            Login
           </Button>
         )}
       </div>
