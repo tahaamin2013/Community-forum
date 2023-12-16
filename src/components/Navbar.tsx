@@ -39,7 +39,6 @@ const Navbar = () => {
 
 
             }
-                {/* <Butto  n onClick={session !== null ? ()=> signOut() : ()=> signIn('github')} text={session !== null ? "Logout" : "Login"} /> */}
       </div>
       </div>
   )
