@@ -36,8 +36,6 @@ export default function GlobalState({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
 
-  if (session === null && pathname === "/create") router.push("/");
-
   return (
     <GlobalContext.Provider
       value={{
