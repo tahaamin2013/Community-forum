@@ -55,12 +55,11 @@ const UserAuthForm: FC<UserAuthFormProps> = ({ className, ...props }) => {
         Google
       </Button>
       <Button
-        onClick={session ? () => signOut() : () => signIn('google')}
-        // This line is unnecessary, as session is already destructured from useSession()
-        // session={session}
-      >
-        {session ? 'Logout' : 'Login'}
-      </Button>
+  onClick={session !== null ? () => signOut() : () => signIn('github')}
+  // session={session}
+>
+  {session !== null ? 'Logout' : 'Login'}
+</Button>
     </div>
   )
 }
