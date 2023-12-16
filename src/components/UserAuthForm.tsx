@@ -10,6 +10,7 @@ import { useContext, useEffect, useState } from "react";
 import {signIn, signOut, useSession} from 'next-auth/react';
 import { usePathname, useRouter } from "next/navigation";
 import { GlobalContext } from "@/context";
+import Link from "next/link";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -49,7 +50,7 @@ const UserAuthForm: FC<UserAuthFormProps> = ({ className, ...props }) => {
   onClick={session !== null ? () => signOut() : () => signIn('github')}
   // session={session}
 >
-<VscGithubInverted size={20} />  Github
+<Link className="flex gap-3 w-full h-full text-center justify-center items-center" href="/"><VscGithubInverted size={20} />  Github</Link>
 </Button>
     </div>
   )
