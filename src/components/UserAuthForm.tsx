@@ -1,16 +1,28 @@
 'use client'
 
 import { cn } from '@/lib/utils'
-import { signIn } from 'next-auth/react'
 import * as React from 'react'
 import { FC } from 'react'
 import { Button } from '@/components/ui/Button'
 import { useToast } from '../hooks/use-toast'
 import { Icons } from './icons'
+import { useContext, useEffect, useState } from "react";
+import {signIn, signOut, useSession} from 'next-auth/react';
+import { usePathname, useRouter } from "next/navigation";
+import { GlobalContext } from "@/context";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 const UserAuthForm: FC<UserAuthFormProps> = ({ className, ...props }) => {
+  const [sticky, setSticky] = useState<boolean>(false);
+  const [navbarOpen, setNavbarOpen] = useState<boolean>(false);
+  const {data: session} = useSession();
+  const router = useRouter();
+  const pathName = usePathname();
+
+  console.log(session, 'session')
+
+
   const { toast } = useToast()
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
 
@@ -18,7 +30,7 @@ const UserAuthForm: FC<UserAuthFormProps> = ({ className, ...props }) => {
     setIsLoading(true)
 
     try {
-      await signIn('google')
+      await signIn('github')
     } catch (error) {
       toast({
         title: 'There was a problems',
@@ -41,6 +53,13 @@ const UserAuthForm: FC<UserAuthFormProps> = ({ className, ...props }) => {
         disabled={isLoading}>
         {isLoading ? null : <Icons.google className='h-4 w-4 mr-2' />}
         Google
+      </Button>
+      <Button
+        onClick={session ? () => signOut() : () => signIn('github')}
+        // This line is unnecessary, as session is already destructured from useSession()
+        // session={session}
+      >
+        {session ? 'Logout' : 'Login'}
       </Button>
     </div>
   )

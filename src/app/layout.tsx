@@ -3,6 +3,7 @@ import '@/styles/globals.css'
 import { Inter } from 'next/font/google'
 import Navbar from '@/components/Navbar'
 import { Toaster } from '@/components/ui/Toaster'
+import NextAuthProvider from '@/components/providers/next-auth-provider'
 
 export const metadata = {
   title: 'Breadit',
@@ -24,6 +25,7 @@ export default function RootLayout({
         inter.className
       )}>
       <body className='min-h-screen pt-12 bg-slate-50 antialiased'>
+        <NextAuthProvider>
           <Navbar /> 
 
           <div className='container max-w-7xl mx-auto h-full pt-12'>
@@ -31,6 +33,7 @@ export default function RootLayout({
           </div>
 
           <Toaster />
+          </NextAuthProvider>
       </body>
     </html>
   )
