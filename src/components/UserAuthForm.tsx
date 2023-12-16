@@ -50,7 +50,7 @@ const UserAuthForm: FC<UserAuthFormProps> = ({ className, ...props }) => {
   onClick={session !== null ? () => signOut() : () => signIn('github')}
   // session={session}
 >
-<Link className="flex gap-3 w-full h-full text-center justify-center items-center" href="/"><VscGithubInverted size={20} />  Github</Link>
+<Link className="flex gap-3 w-full h-full text-center justify-center items-center" href="/"><VscGithubInverted size={20} /> Github</Link>
 </Button>
     </div>
   )
