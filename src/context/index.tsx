@@ -7,8 +7,6 @@ import {
   createContext,
   useState,
 } from "react";
-import { useSession } from "next-auth/react";
-import { usePathname, useRouter } from "next/navigation";
 
 type ContextType = {
   loading: boolean;
@@ -32,9 +30,6 @@ export const GlobalContext = createContext<ContextType>(initialState);
 export default function GlobalState({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const { data: session } = useSession();
-  const pathname = usePathname();
-  const router = useRouter();
 
   return (
     <GlobalContext.Provider
