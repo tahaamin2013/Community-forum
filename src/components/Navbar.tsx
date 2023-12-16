@@ -1,11 +1,14 @@
+"use client"
 import Link from 'next/link'
 import React from 'react'
 import { Icons } from './icons'
-import { buttonVariants } from './ui/Button'
+import { Button, buttonVariants } from './ui/Button'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
+import {signIn, signOut, useSession} from 'next-auth/react';
 
 const Navbar = () => {
+  const { data: session } = useSession();
 
   return (
     <div className='fixed top-0 inset-x-0 h-fit bg-white shadow-md z-[10] py-2'>
@@ -17,9 +20,18 @@ const Navbar = () => {
 
     
 
+         {/* {session?.user ? (
+          <p>sfda</p>
+         ): (
           <Link href='/sign-in' className={buttonVariants()}>
-            Sign In
-          </Link>
+          Sign In
+        </Link>
+         )
+        } */}
+        
+        <Button onClick={session !== null ? ()=> signOut() : ()=> signIn('github')}>
+        {session !== null ? "Logout" : "Login"}
+        </Button>
 
       </div>
       </div>

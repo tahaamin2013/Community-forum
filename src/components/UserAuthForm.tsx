@@ -17,7 +17,7 @@ interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 const UserAuthForm: FC<UserAuthFormProps> = ({ className, ...props }) => {
   const [sticky, setSticky] = useState<boolean>(false);
   const [navbarOpen, setNavbarOpen] = useState<boolean>(false);
-  const {data: session} = useSession();
+  const {data: session} = useSession(); 
   const router = useRouter();
   const pathName = usePathname();
 
