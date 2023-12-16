@@ -1,20 +1,18 @@
 "use client"
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Icons } from './icons';
 import { Button, buttonVariants } from './ui/Button';
-import { getServerSession } from 'next-auth';
 import { signIn, signOut, useSession } from 'next-auth/react';
 
 const Navbar = () => {
   const { data: session } = useSession();
-  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  const [isLoggedIn, setIsLoggedIn] = React.useState(!!session);
 
   const handleSignIn = async () => {
     try {
-      const signInResult = await signIn('github'); // Passing provider without authOptions
+      const signInResult = await signIn('github');
       if (signInResult?.error) {
-        // Handle error if needed
         console.error(signInResult.error);
       } else {
         setIsLoggedIn(true);
@@ -32,6 +30,10 @@ const Navbar = () => {
       console.error('Error during sign-out:', error);
     }
   };
+
+  useEffect(() => {
+    setIsLoggedIn(!!session); // Update isLoggedIn state when session changes
+  }, [session]);
 
   return (
     <div className='fixed top-0 inset-x-0 h-fit bg-white shadow-md z-[10] py-2'>
