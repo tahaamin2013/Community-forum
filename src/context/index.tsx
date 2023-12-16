@@ -33,11 +33,12 @@ export default function GlobalState({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const { data: session } = useSession();
-  const pathname = usePathname();
   const router = useRouter();
 
-  if (session === null && pathname === "/") router.push("/");
-
+  if (!session) {
+    router.push("/");
+    return null; // Optional: You can render something while redirecting
+  }
   return (
     <GlobalContext.Provider
       value={{
