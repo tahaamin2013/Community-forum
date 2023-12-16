@@ -1,5 +1,5 @@
 'use client'
-
+import { VscGithubInverted } from "react-icons/vsc";
 import { cn } from '@/lib/utils'
 import * as React from 'react'
 import { FC } from 'react'
@@ -45,20 +45,11 @@ const UserAuthForm: FC<UserAuthFormProps> = ({ className, ...props }) => {
   return (
     <div className={cn('flex justify-center', className)} {...props}>
       <Button
-        isLoading={isLoading}
-        type='button'
-        size='sm'
-        className='w-full' 
-        onClick={loginWithGoogle}
-        disabled={isLoading}>
-        {isLoading ? null : <Icons.google className='h-4 w-4 mr-2' />}
-        Google
-      </Button>
-      <Button
+      className='w-full flex gap-3'
   onClick={session !== null ? () => signOut() : () => signIn('github')}
   // session={session}
 >
-  {session !== null ? 'Logout' : 'Login'}
+<VscGithubInverted size={20} />  Github
 </Button>
     </div>
   )
