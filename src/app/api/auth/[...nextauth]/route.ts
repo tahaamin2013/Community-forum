@@ -13,7 +13,7 @@ const authOptions : AuthOptions = {
     providers : [
         GithubProvider({
             clientId : 'Iv1.773c863e1f0ca9e8',
-            clientSecret : '113b27e13ac21876eca9c34d318b65732ecf8624'
+            clientSecret : 'c84355be2cbdde8dbe8cced85397ce37410c8764'
         })
     ],
     callbacks : {
