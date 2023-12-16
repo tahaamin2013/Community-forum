@@ -34,7 +34,9 @@ const Navbar = () => {
                   <Button onClick={()=> router.push('/sign-in')}>
                   Sign in
                 </Button> :
-                <p>Sign infdsa</p>
+                 <Button onClick={() => signOut()}>
+                 Sign Out
+               </Button> 
                 
 
 
