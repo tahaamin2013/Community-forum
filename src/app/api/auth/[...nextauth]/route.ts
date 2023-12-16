@@ -8,7 +8,6 @@
 import {AuthOptions} from 'next-auth';
 import GithubProvider from "next-auth/providers/github";
 import NextAuth from 'next-auth/next';
-import { useRouter } from 'next/navigation';
 
 const authOptions : AuthOptions = {
     providers : [
@@ -26,8 +25,9 @@ const authOptions : AuthOptions = {
             return session
         }
     },
-    secret : 'default_secret_Key'
+    secret : 'defafsdault_secret_Kefdy'
 }
 
 const nextAuth = NextAuth(authOptions);
+
 export { nextAuth as GET, nextAuth as POST}
