@@ -7,6 +7,17 @@ import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import {signIn, signOut, useSession} from 'next-auth/react';
 import { useRouter } from 'next/navigation'
+import UserAccountNav from './UserAccountNav'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+import UserAuthForm from './UserAuthForm'
+
 
 const Navbar = () => {
   // const session = await getServerSession(authOptions)
@@ -29,9 +40,37 @@ const Navbar = () => {
           </Link>
         )} */}
          {session !== null ? (
-          <Button onClick={() => signOut()}>Logout</Button>
-         ) : (
-          <Button onClick={()=> router.push('/sign-in')}>Login</Button>
+          // <Button onClick={() => signOut()}>Logout</Button>
+          <UserAccountNav />
+         ) : (  
+          <Dialog>
+              <DialogTrigger>
+          <Button>Sign in</Button>
+          </DialogTrigger>
+            <DialogContent>
+            <DialogDescription>
+            <div className='container mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[400px]'>
+      <div className='flex flex-col space-y-2 text-center'>
+        <Icons.logo className='mx-auto h-6 w-6' />
+        <h1 className='text-2xl font-semibold tracking-tight'>Welcome back</h1>
+        <p className='text-sm max-w-xs mx-auto'>
+          By continuing, you are setting up a Breadit account and agree to our
+          User Agreement and Privacy Policy.
+        </p>
+      </div>
+      <UserAuthForm />
+      <p className='px-8 text-center text-sm text-muted-foreground'>
+        New to Breaddit?{' '}
+        <Link
+          href='/sign-up'
+          className='hover:text-brand text-sm underline underline-offset-4'>
+          Sign Up
+        </Link>
+      </p>
+    </div>
+      </DialogDescription>
+            </DialogContent>
+          </Dialog>
          )}
           {/* <Button onClick={session !== null ? ()=> signOut() : ()=> router.push('/sign-in')} >{session !== null ? "Logout" : "Login"}</Button> */}
       </div>
