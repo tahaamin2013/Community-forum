@@ -1,3 +1,4 @@
+"use client"
 import React from 'react'
 import Link from 'next/link'
 import { useSession } from 'next-auth/react'
@@ -22,6 +23,7 @@ const UserAccountNav = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
+      <div className="flex items-center">
           {user?.image && (
             <img
               src={user.image}
@@ -29,13 +31,14 @@ const UserAccountNav = () => {
               className="h-8 w-8 rounded-full object-cover mr-2"
             />
           )}
+        </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent className='bg-white' align='end'>
         <div className='flex items-center justify-start gap-2 p-2'>
           <div className='flex flex-col space-y-1 leading-none'>
-            {user?.name && <p className='font-medium truncate w-[160px]'>{user.name}</p>}
+            {user?.name && <p className='font-medium'>{user.name}</p>}
             {user?.email && (
-              <p className='truncate max-w-[200px] text-sm text-muted-foreground'>
+              <p className='w-[200px] truncate text-sm text-muted-foreground'>
                 {user.email}
               </p>
             )}

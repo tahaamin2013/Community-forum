@@ -1,29 +1,16 @@
 'use client'
-import { VscGithubInverted } from "react-icons/vsc";
+
 import { cn } from '@/lib/utils'
+import { signIn } from 'next-auth/react'
 import * as React from 'react'
 import { FC } from 'react'
 import { Button } from '@/components/ui/Button'
-import { useToast } from '../hooks/use-toast'
+import { useToast } from '@/hooks/use-toast'
 import { Icons } from './icons'
-import { useContext, useEffect, useState } from "react";
-import {signIn, signOut, useSession} from 'next-auth/react';
-import { usePathname, useRouter } from "next/navigation";
-import { GlobalContext } from "@/context";
-import Link from "next/link";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 const UserAuthForm: FC<UserAuthFormProps> = ({ className, ...props }) => {
-  const [sticky, setSticky] = useState<boolean>(false);
-  const [navbarOpen, setNavbarOpen] = useState<boolean>(false);
-  const {data: session} = useSession(); 
-  const router = useRouter();
-  const pathName = usePathname();
-
-  console.log(session, 'session')
-
-
   const { toast } = useToast()
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
 
@@ -31,10 +18,10 @@ const UserAuthForm: FC<UserAuthFormProps> = ({ className, ...props }) => {
     setIsLoading(true)
 
     try {
-      await signIn('github')
+      await signIn('google')
     } catch (error) {
       toast({
-        title: 'There was a problems',
+        title: 'Error',
         description: 'There was an error logging in with Google',
         variant: 'destructive',
       })
@@ -46,12 +33,15 @@ const UserAuthForm: FC<UserAuthFormProps> = ({ className, ...props }) => {
   return (
     <div className={cn('flex justify-center', className)} {...props}>
       <Button
-      className='w-full flex gap-3'
-  onClick={session !== null ? () => signOut() : () => signIn('github')}
-  // session={session}
->
-<Link className="flex gap-3 w-full h-full text-center justify-center items-center" href="/"><VscGithubInverted size={20} /> Github</Link>
-</Button>
+        isLoading={isLoading}
+        type='button'
+        size='sm'
+        className='w-full'
+        onClick={loginWithGoogle}
+        disabled={isLoading}>
+        {isLoading ? null : <Icons.google className='h-4 w-4 mr-2' />}
+        Google
+      </Button>
     </div>
   )
 }
