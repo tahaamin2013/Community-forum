@@ -78,12 +78,19 @@ const Post: FC<PostProps> = ({
         </div>
       </div>
 
-      <div className='bg-gray-50 z-20 text-sm px-4 py-4 sm:px-6'>
+      <div className='bg-gray-50 z-20 text-sm px-4 py-4 sm:px-6 flex flex-row justify-between'>
         <Link
           href={`/r/${subredditName}/post/${post.id}`}
           className='w-fit flex items-center gap-2'>
           <MessageSquare className='h-4 w-4' /> {commentAmt} comments
         </Link>
+        {user?.image && (
+            <img
+              src={user.image}
+              alt="User"
+              className="h-8 w-8 rounded-full object-cover mr-2"
+            />
+          )}
       </div>
     </div>
   )
